@@ -92,7 +92,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		printf("Usage : command filename\nPress a key to continue\n");
+		printf("Usage : wavtest.exe filename\nPress a key to continue\n");
 		getc(stdin);
 	}
 	
