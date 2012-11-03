@@ -24,3 +24,5 @@ wave.o: main.c
 #nettoyage
 clean:
 	erase /f *.o *~ main
+
+0xAC1DE
