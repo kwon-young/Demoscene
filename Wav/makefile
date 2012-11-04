@@ -31,8 +31,8 @@ all:test
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
  
 test: $(OBJS) $(HEADER)
-	@echo Creation de test.exe
+	@echo Creation de wavtest.exe
 	$(CC) -o wavtest.exe $(OBJS) $(CFLAGS) $(LIBS)
 	
 clean:
-	rm *.o
+	del *.o

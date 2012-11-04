@@ -42,11 +42,20 @@ int main(int argc, char **argv)
 		
 		//Lisont le fichier
 		
-		fread (&riff_magic, 4, 1,pFile);
+		fread ((BYTE*)(&riff_magic) + 3, 1, 1,pFile); // le magic du header riff est le code ascii de "RIFF"
+		fread ((BYTE*)(&riff_magic) + 2, 1, 1,pFile); // On lit donc en sens inverse (en big endian)
+		fread ((BYTE*)(&riff_magic) + 1, 1, 1,pFile); // de nos jours les fichiers utilient la notation little endian
+		fread ((BYTE*)(&riff_magic), 1, 1,pFile);     // ce qui veut dire le byte de poid faible en premier
 		fread (&riff_chunk_size, 4, 1,pFile);
-		fread (&riff_format, 4, 1,pFile);
+		fread ((BYTE*)(&riff_format) + 3, 1, 1,pFile); //dans le cas d'un fichier wave riff_format contient le code ascii "WAVE"
+		fread ((BYTE*)(&riff_format) + 2, 1, 1,pFile);
+		fread ((BYTE*)(&riff_format) + 1, 1, 1,pFile);
+		fread ((BYTE*)(&riff_format), 1, 1,pFile);
 		
-		fread (&fmt_magic, 4, 1,pFile);
+		fread ((BYTE*)(&fmt_magic) + 3, 1, 1,pFile); // le magic du fmt header est le code ascii "fmt "
+		fread ((BYTE*)(&fmt_magic) + 2, 1, 1,pFile);
+		fread ((BYTE*)(&fmt_magic) + 1, 1, 1,pFile);
+		fread ((BYTE*)(&fmt_magic), 1, 1,pFile);
 		fread (&fmt_chunk_size, 4, 1,pFile);
 		fread (&fmt_audio_format, 2, 1,pFile);
 		fread (&fmt_num_channels, 2, 1,pFile);
@@ -55,7 +64,10 @@ int main(int argc, char **argv)
 		fread (&fmt_block_align, 2, 1,pFile);
 		fread (&fmt_bits_per_sample, 2, 1,pFile);
 		
-		fread (&data_magic, 4, 1,pFile);
+		fread ((BYTE*)(&data_magic) + 3, 1, 1,pFile); // le magic du header data est le code ascii "data"
+		fread ((BYTE*)(&data_magic) + 2, 1, 1,pFile);
+		fread ((BYTE*)(&data_magic) + 1, 1, 1,pFile);
+		fread ((BYTE*)(&data_magic), 1, 1,pFile);
 		fread (&data_chunk_size, 4, 1,pFile);
 		
 		//Maintenant vérifications des magics, si il sont faux alors on affirme que le fichier n'est pas un fichier wav
@@ -68,8 +80,8 @@ int main(int argc, char **argv)
 		
 		//On va maintenant afficher les infos sur le header avec des gros printf
 		printf("RIFF Header Infos\n");
-		printf("Magic : 0x%X (must be 0x52944646)\n",riff_magic);
-		printf("Chunck Size : %u (must be size of file - 8)\n",riff_chunk_size);
+		printf("Magic : 0x%X (must be 0x52494646)\n",riff_magic);
+		printf("Chunck Size : %u (must be size of file)\n",riff_chunk_size);
 		printf("File Format ID : 0x%X (must be 0x57415645 for wav format)\n\n",riff_format);
 		
 		printf("FMT Sub-Header Infos\n");
@@ -84,7 +96,11 @@ int main(int argc, char **argv)
 		
 		printf("Data Sub-Header Infos\n");
 		printf("Magic : 0x%X (must be 0x64617461)\n",data_magic);
-		printf("Chunck Size : 0x%X (must be size of file - 4)\n",data_chunk_size);
+		printf("Chunck Size : %u (must be size of file - 44)\n",data_chunk_size);
+		
+		float estimated_time = (float)data_chunk_size/(float)fmt_byte_rate;
+		
+		printf("\nEstimated time : %f seconds\n",estimated_time);
 		
 		fclose (pFile);
 		printf("\nPress a key to continue\n");
