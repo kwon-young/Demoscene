@@ -3,6 +3,7 @@
 #include <time.h>
 #include <sys\time.h>
 
+struct timeval t0;
 void startChronos(void){
   gettimeofday(&t0,NULL);
   
