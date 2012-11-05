@@ -1,0 +1,53 @@
+//Fichier resource.rc					Auteur : Clubber
+
+#define  WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include "resource.h"
+
+//Fichier resources de windows, ici on inclu tous les elements qui ne sont pas 
+//du code au programe et on definis l'arrangement des fenetres
+
+//On inclus les icones dans l'executable
+IDI_RELEASE ICON   "icone.ico"
+IDI_BDE     ICON   "bde.ico"
+
+//On inclus l'image du logo dans l'executable
+ID_LOGO     BITMAP "logo.bmp"
+
+//On defini ensuite les boites de dialogue avec leur arrangement...
+
+//Fenetre du Keygen
+IDD_RELEASE DIALOGEX 0, 0, 138, 180, WS_EX_STATICEDGE //fenetre de 138x150 ? pas tt a fait puisque la taille depend de la fonte
+STYLE  WS_POPUPWINDOW | WS_CAPTION | DS_CENTER | WS_EX_STATICEDGE | WS_VISIBLE
+FONT 10, "Verdana" //Fonte de taille 10 : si vous modifier la taille vous pouvez mofifiez la taille de votre logo --* merci  Microzoft
+BEGIN
+  //PLacement du logo                                     Position   Taille 
+  CONTROL ID_LOGO, IDC_LOGO, "STATIC", SS_BITMAP | SS_NOTIFY, 5, 5, 100, 100, WS_EX_STATICEDGE
+  
+  //Certainement le plus interressant les champs de textes pour entré des informations
+  //LTEXT defini un label centré sur la gauche (L = Left)
+  //EDITTEXT un rectangle contenant du texte
+  LTEXT "Champ d'entrée :", IDC_STATIC, 15, 85, 100, 12 //Accents supportées par mingwin merci microzoft !
+  EDITTEXT IDC_ENTRE, 25, 100, 90, 12, NOT WS_BORDER | ES_AUTOHSCROLL, WS_EX_CLIENTEDGE
+
+  LTEXT "Champ de sortie :", IDC_STATIC, 15, 115, 100, 12
+  EDITTEXT IDC_SORTIE, 25, 130, 90, 12, NOT WS_BORDER | ES_READONLY, WS_EX_CLIENTEDGE
+  
+  
+  //les bouton ici le keygen est tout simple il recopie sur le champ sortie... le champ d'entrée...
+  PUSHBUTTON    "Copie", IDB_ACTION , 5, 150, 130, 12, BS_PUSHBUTTON, WS_EX_STATICEDGE
+  PUSHBUTTON    "Super BDE" , IDB_BDE, 72, 165, 62, 12, BS_PUSHBUTTON, WS_EX_STATICEDGE
+  PUSHBUTTON    "Quitter" , IDB_QUIT, 5, 165, 62, 12, BS_PUSHBUTTON, WS_EX_STATICEDGE
+  
+END
+
+//Fenetre du BDE
+IDD_BDE DIALOGEX 0, 0, 180, 120,WS_EX_STATICEDGE
+STYLE  WS_POPUPWINDOW | WS_CAPTION | DS_CENTER | WS_EX_STATICEDGE
+FONT 10, "Verdana"
+BEGIN
+  CONTROL IDI_BDE, IDC_STATIC, "STATIC", SS_ICON, 5, 5, 64, 64
+  LTEXT "Super BDE Team !\nBienvenue dans notre super release de\nLamers...\nOn est tellement nuls qu'on a dû\nutiliser un template...\nMais bon bientôt on aura notre revanche !\n\nGreetings :\n ~ Clubber ~ pour le template\n\nSuper BDE : on aura notre revanche !", IDC_STATIC, 32, 5, 200, 400
+  PUSHBUTTON    "Ok" , IDB_BDEOK, 60, 100, 55, 15, BS_DEFPUSHBUTTON, WS_EX_CLIENTEDGE
+END
+// Et voilà ^^ 
