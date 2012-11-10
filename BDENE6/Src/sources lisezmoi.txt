@@ -1,0 +1,13 @@
+Le BDE NE666 est fier de donner ce code source sous license BSD 
+donc faite-en ce que vous voulez... il est théoriquement portable
+puisqu'il utilise uniquement la lib standart...
+
+Vous aurez besoin pour le compiler de stb_image_write.h de Sean Barett
+On trouve sa facile sur http://www.nothings.org/ ;)
+
+Si vous ne modifier pas le Header gardez le même magic ! comme sa
+nos programmes pourrons lire votre fichier ! 
+
+Lisez bien les .h ils donnent des infos utiles pour compiler tout sa
+Il est commenté en bon Franglais ;)
+
