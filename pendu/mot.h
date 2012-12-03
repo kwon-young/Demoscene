@@ -1,2 +1,0 @@
-BLEU
-HELLO
