@@ -59,9 +59,21 @@ local.properties
 *.tli
 *.tlh
 *.tmp
+*.o
 *.vspscc
 .builds
 *.dotCover
+
+#builds folders
+build/
+Build/
+builds/
+Builds/
+
+#linux backup
+*~
+
+
 
 ## TODO: If you have NuGet Package Restore enabled, uncomment this
 #packages/
