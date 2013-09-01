@@ -619,5 +619,20 @@ std::string disassembly(const uint16_t* data, size_t size)
 
 std::string disassembly_file(const char* filename)
 {
-	
+	FILE* f = fopen(filename,"rb");
+	if (!f) return "";
+	unsigned int size = fsize(f);
+	unsigned int size_2 = size/2;
+	unsigned int size_2_1 = size_2 +1;
+	uint16_t* buff = new uint16_t[size_2_1]; 
+	fread(buff,2,size_2,f);
+	fswitchendian(buff, size_2);
+	std::string d;
+	for (unsigned int i = 0; i < size_2;i++)
+	{
+		d += disassembly(&(buff[i]), size_2 - i);
+		d += "\n";
+	}
+	fclose(f);
+	return d;
 }

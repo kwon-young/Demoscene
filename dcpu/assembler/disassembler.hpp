@@ -3,9 +3,7 @@
 
 #include <string>
 #include <cstdint>
-
-namespace cpu
-{
+#include "file.h"
 
 /**
  * Disassembly DCPU-16 code to a humman redable text
@@ -15,6 +13,5 @@ namespace cpu
 std::string disassembly(const uint16_t* data, size_t size);
 
 std::string disassembly_file(const char* filename);
-}
 
 #endif // DISASSEMBLER_HPP

@@ -126,7 +126,7 @@ enum operator_type {
 #define WOPSET_A(word,a) ((word & 0xFC00) | (a << 10))
 #define WOPSET_B(word,b) ((word & 0x3E0) | ((b & 0x1F) << 5))
 #define WOPSET_SPECIAL_OP(word,op) WOPSET_B(word,op)
-#define WOPGET_SPECIAL_A(word,a) WOPSET_A(word,a)
+#define WOPSET_SPECIAL_A(word,a) WOPSET_A(word,a)
 
 // END OF namespace
 

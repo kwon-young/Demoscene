@@ -7,8 +7,6 @@
 #include <deque>
 #include <string>
 
-namespace cpu {
-
 const unsigned int DCPU_TOTAL_REGS  = 12;       /// DCPU registers
 const unsigned int MAX_DEVICES      = 65535;    /// Max hardware devices
 const unsigned int QUEUE_SIZE       = 256;      /// Int. queue size
@@ -274,6 +272,7 @@ public:
      * @return
     */
     virtual bool checkInterrupt (uint16_t &msg) {
+	    (void) msg;
         return false;
     }
     
@@ -292,8 +291,5 @@ protected:
     size_t index;   /// Hardware Device index
     
 };
-
-
-} // END OF NAMESPACE
 
 #endif // DCPU_HPP

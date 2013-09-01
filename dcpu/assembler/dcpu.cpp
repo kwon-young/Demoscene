@@ -8,7 +8,6 @@
 
 #include <assert.h>
 
-namespace cpu {
 
 
 /// Checks if a OpCode is a Branch instrucction
@@ -57,7 +56,6 @@ bool DCPU::loadProgram (const uint16_t* prog,unsigned int size,unsigned int offs
 {
     assert (prog != NULL);
     assert (size > 0);
-    assert (offset >= 0);
     assert (offset + size < 	UINT16_MAX);
 	if (RAM_SIZE < offset + size)
 	{
@@ -109,7 +107,7 @@ int DCPU::realStep()
     register uint16_t *a = NULL, *b = NULL;
     register int16_t sa, sb;   	// Signed versions
     register uint_fast32_t tmp_result;
-    register uint16_t tmp_a;			// Used by Literal values
+    uint16_t tmp_a;			// Used by Literal values
     uint_fast16_t old_sp = rsp;
     
     uint16_t op = *(ram + (rpc++));
@@ -867,7 +865,6 @@ std::string DCPU::dumpRam (uint16_t init, uint16_t end)
     uint32_t bigend = end;
     uint32_t i = init;
     
-    assert (i >= 0);
     assert (bigend >= i);
     assert (bigend < RAM_SIZE);
     
@@ -963,5 +960,3 @@ void DCPU::tickHardware()
     }
 }
 
-
-} // END NAMESPACE
