@@ -1,10 +1,10 @@
 
 CC=gcc
 CXX=g++
-HEADER=dcpu.hpp dcpu_opcodes.hpp config.hpp disassembler.hpp file.h
+HEADER=dcpu.hpp dcpu_opcodes.hpp config.hpp disassembler.hpp file.h binasm.hpp
 CFLAGS= -Wall -W -pedantic -static-libgcc -O4 -Os -s -std=c99
-CXXFLAGS= -Wall -W -pedantic -static-libgcc -O4 -Os -s -std=c++11
-OBJ=dcpu.o main.o disassembler.o file.o
+CXXFLAGS= -Wall -W -pedantic -static-libgcc -O4 -Os -s -std=c++11 -static-libstdc++
+OBJ=dcpu.o main.o disassembler.o file.o binasm.o
 
 
 all:asm

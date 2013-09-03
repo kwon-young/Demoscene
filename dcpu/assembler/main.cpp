@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include "binasm.hpp"
 #include "disassembler.hpp"
 
 
@@ -26,7 +27,7 @@ int main(int argc, char** argv)
 	    print_help(pn.c_str());
 	}
 	
-	for (int k = 0; k < argc; k++)
+	for (int k = 1; k < argc; k++)
 	{
 		if (std::string("-d") == argv[k])
 			disassemble = true;
@@ -49,14 +50,25 @@ int main(int argc, char** argv)
 	for (std::vector<std::string>::iterator i = filenames.begin()
 	      ; i != filenames.end() ; i++)
 	{
+		std::cout << "file " << *i << std::endl;
 		if (disassemble)
 		{
+			std::cout << "disasembling... " << std::endl;
 			std::string dis=disassembly_file(i->c_str());
+			std::cout << "writing file to " << target << "... " << std::endl;
 			fwritetext(target.c_str(), dis.c_str());
 		}
 		else
 		{
-			//TODO Assembler 
+			
+			BinAsm basm;
+			std::cout << "loading file... " << std::endl;
+			basm.load(*i);
+			std::cout << "find labels... " << std::endl;
+			basm.finds_labels();
+			std::cout << "translate and save... " << std::endl;
+			basm.save(target);
+			//basm.print_labels();
 		}
 	}
 	return 0x600D; // return good
