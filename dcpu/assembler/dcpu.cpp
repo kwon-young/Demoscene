@@ -706,8 +706,6 @@ int DCPU::realStep()
             
         default:
             // reserved; Act like a NOP
-			/*printf("Error op Ox%x a 0x%x b 0x%x\n",WOPGET_OP(op),
-			                                     WOPGET_A(op),WOPGET_B(op));*/
             cycles++;
             break;
         }
@@ -787,8 +785,6 @@ int DCPU::realStep()
             
         default:
             // reserved; Does a NOP
-			/*printf("Error spec zeros Ox%x a 0x%x op 0x%x\n",WOPGET_OP(op),
-			                                     WOPGET_SPECIAL_A(op),WOPGET_SPECIAL_OP(op));*/
             cycles++;
             break;
         }
